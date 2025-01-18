@@ -59,7 +59,7 @@ class ModelGenerator extends AbstractGenerator
         $inspect = $modelInspector->inspect($this->model::class, $this->model->getConnection()->getName());
 
         $this->columns = $inspect['attributes']->filter(function (array $attribute) {
-            // check if type is not null because of "mixed_accessor" in "attributes" collection
+            // check if the attribute is not hidden and type is not null because of "mixed_accessor" in "attributes" collection
             return $attribute['hidden'] === false && !is_null($attribute['type']);
         });
     }
