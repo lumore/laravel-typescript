@@ -2,9 +2,9 @@ name: run-tests
 
 on:
   push:
-    branches: [master]
+    branches: [ master ]
   pull_request:
-    branches: [master]
+    branches: [ master ]
 
 jobs:
   test:
@@ -12,8 +12,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        os: [ubuntu-latest, windows-latest]
-        stability: [prefer-lowest, prefer-stable]
+        os: [ ubuntu-latest, windows-latest ]
         include:
           # Laravel 11 mappings
           - laravel: 11.*
@@ -21,13 +20,11 @@ jobs:
             testbench: ^9.0
             larastan: ^3.0
             stability: prefer-stable
-
           - laravel: 11.*
             php: 8.3
             testbench: ^9.0
             larastan: ^3.0
             stability: prefer-stable
-
           - laravel: 11.*
             php: 8.4
             testbench: ^9.0
@@ -40,13 +37,11 @@ jobs:
             testbench: ^8.0
             larastan: ^2.0
             stability: prefer-lowest
-
           - laravel: 10.*
             php: 8.2
             testbench: ^8.0
             larastan: ^2.0
             stability: prefer-stable
-
           - laravel: 10.*
             php: 8.3
             testbench: ^8.0
