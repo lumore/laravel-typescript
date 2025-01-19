@@ -6,6 +6,8 @@ use Based\TypeScript\TypeScriptGenerator;
 
 class GeneratorTest extends TestCase
 {
+    protected static $latestResponse; // tmp fix
+
     /** @test */
     public function it_works()
     {
