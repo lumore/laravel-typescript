@@ -2,10 +2,9 @@
 
 namespace Based\TypeScript\Generators;
 
+use Based\TypeScript\Definitions\ColumnTypes;
 use Based\TypeScript\Definitions\TypeScriptProperty;
 use Based\TypeScript\Definitions\TypeScriptType;
-use Doctrine\DBAL\Schema\Column;
-use Doctrine\DBAL\Types\Types;
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Arr;
@@ -16,7 +15,6 @@ use Illuminate\Validation\ClosureValidationRule;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Validation\Validator;
 use JetBrains\PhpStorm\Pure;
-use Laravel\Fortify\Rules\Password as FortifyPassword;
 
 class RequestGenerator extends AbstractGenerator
 {
@@ -73,16 +71,15 @@ class RequestGenerator extends AbstractGenerator
         $method = $clazz->getMethod('getValidatorInstance');
         $method->setAccessible(true);
 
-        /** @var \Illuminate\Validation\Validator $validator */
         $this->validator = $method->invoke($this->request);
 
         $this->customRules = config('typescript.customRules');
     }
 
     /**
-     * @param array|string $rules
      * @param string $property
-     * @return string[]|null
+     * @param array|string $rules
+     * @return array|null
      */
     private function parseRules(string $property, array|string $rules): ?array
     {
@@ -136,7 +133,7 @@ class RequestGenerator extends AbstractGenerator
     }
 
     /**
-     * @param \Illuminate\Support\Collection $rules
+     * @param Collection $rules
      * @return string[]
      */
     private function getPropertyTypes(Collection $rules): array
@@ -148,9 +145,6 @@ class RequestGenerator extends AbstractGenerator
             ->all();
     }
 
-    /**
-     * @throws \Doctrine\DBAL\Exception
-     */
     private function parseRuleObject(string $property, object $rule): Collection
     {
         if (method_exists($rule, '__toString')) {
@@ -159,7 +153,7 @@ class RequestGenerator extends AbstractGenerator
 
         return collect(
             match (true) {
-                ($rule instanceof Password), ($rule instanceof FortifyPassword) => ['string' => null],
+                ($rule instanceof Password),
                 ($rule instanceof ClosureValidationRule) => ['any' => null],
                 in_array($clazz = get_class($rule), $this->customRules, true) => array_fill_keys(
                     Arr::wrap($this->customRules[$clazz]),
@@ -170,22 +164,16 @@ class RequestGenerator extends AbstractGenerator
         );
     }
 
-    /**
-     * @throws \Doctrine\DBAL\Exception
-     */
     private function parseRuleString(string $property, string $rule): Collection
     {
         return collect(explode(':', $rule, 2))
             ->mapWithKeys(
-                fn (string $args, int|string $key) => is_int($key)
+                fn (string $args, int $key) => $key === 0
                     ? [$this->parseRuleName($property, $args) => null]
-                    : [$this->parseRuleName($property, $key, $args) => $args]
+                    : [$this->parseRuleName($property, $args) => $args]
             );
     }
 
-    /**
-     * @throws \Doctrine\DBAL\Exception
-     */
     private function parseRuleName(string $property, string $rule, string $args = null): ?string
     {
         return match ($rule) {
@@ -204,19 +192,14 @@ class RequestGenerator extends AbstractGenerator
      * @param string $property
      * @param string|null $args
      * @return string|null
-     * @throws \Doctrine\DBAL\Exception
      */
     private function resolveColumn(string $property, ?string $args): ?string
     {
         $args = explode(',', $args);
-        if (count($args) === 0) {
-            return null;
-        }
 
         $table = $args[0];
         $columnName = Arr::get($args, 1) ?? $property;
 
-        /** @var \Illuminate\Database\Connection $connection */
         $connection = DB::connection();
 
         $prefix = $connection->getTablePrefix();
@@ -225,26 +208,24 @@ class RequestGenerator extends AbstractGenerator
             return null;
         }
 
-        $schemaManager = $connection->getDoctrineSchemaManager();
-        $columns = collect($schemaManager->listTableColumns("$prefix$table"));
+        $columns = collect(Schema::getColumnListing($prefix.$table));
 
-        /** @var Column $column */
-        $column = $columns->first(fn (Column $column) => $column->getName() === $columnName);
+        $column = $columns->first(fn (array $column) => $column['name'] === $columnName);
 
-        return $this->getColumnType($column->getType()->getName());
+        return $this->getColumnType(Schema::getColumnType($prefix.$table, $column));
     }
 
-    #[Pure] protected function getColumnType(string $type): string|array
+    protected function getColumnType(string $type): string|array
     {
         return match ($type) {
-            Types::ARRAY, Types::JSON, Types::SIMPLE_ARRAY => [TypeScriptType::array(), TypeScriptType::ANY],
-            Types::ASCII_STRING, Types::BINARY, Types::BLOB, Types::DATE_MUTABLE,
-            Types::DATE_IMMUTABLE, Types::DATEINTERVAL, Types::DATETIME_MUTABLE,
-            Types::DATETIME_IMMUTABLE, Types::DATETIMETZ_MUTABLE, Types::DATETIMETZ_IMMUTABLE,
-            Types::GUID, Types::STRING, Types::TEXT => TypeScriptType::STRING,
-            Types::BIGINT, Types::DECIMAL, Types::FLOAT, Types::INTEGER,
-            Types::SMALLINT, Types::TIME_MUTABLE, Types::TIME_IMMUTABLE => TypeScriptType::NUMBER,
-            Types::BOOLEAN => TypeScriptType::BOOLEAN,
+            ColumnTypes::ARRAY, ColumnTypes::JSON, ColumnTypes::SIMPLE_ARRAY => [TypeScriptType::array(), TypeScriptType::ANY],
+            ColumnTypes::ASCII_STRING, ColumnTypes::BINARY, ColumnTypes::BLOB, ColumnTypes::DATE_MUTABLE,
+            ColumnTypes::DATE_IMMUTABLE, ColumnTypes::DATEINTERVAL, ColumnTypes::DATETIME_MUTABLE,
+            ColumnTypes::DATETIME_IMMUTABLE, ColumnTypes::DATETIMETZ_MUTABLE, ColumnTypes::DATETIMETZ_IMMUTABLE,
+            ColumnTypes::GUID, ColumnTypes::STRING, ColumnTypes::TEXT => TypeScriptType::STRING,
+            ColumnTypes::BIGINT, ColumnTypes::DECIMAL, ColumnTypes::FLOAT, ColumnTypes::INTEGER,
+            ColumnTypes::SMALLINT, ColumnTypes::TIME_MUTABLE, ColumnTypes::TIME_IMMUTABLE => TypeScriptType::NUMBER,
+            ColumnTypes::BOOLEAN => TypeScriptType::BOOLEAN,
             default => TypeScriptType::ANY,
         };
     }

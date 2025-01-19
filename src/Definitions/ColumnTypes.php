@@ -16,6 +16,7 @@ class ColumnTypes
     public const DATETIME_IMMUTABLE = 'datetime_immutable';
     public const DATETIMETZ_MUTABLE = 'datetimetz';
     public const DATETIMETZ_IMMUTABLE = 'datetimetz_immutable';
+    public const NUMERIC = 'numeric';
     public const DECIMAL = 'decimal';
     public const FLOAT = 'float';
     public const ENUM = 'enum';
@@ -27,7 +28,7 @@ class ColumnTypes
     public const OBJECT = 'object';
     public const SMALLFLOAT = 'smallfloat';
     public const SMALLINT = 'smallint';
-    public const STRING = 'string';
+    public const VARCHAR = 'varchar';
     public const TEXT = 'text';
     public const TIME_MUTABLE = 'time';
     public const TIME_IMMUTABLE = 'time_immutable';
