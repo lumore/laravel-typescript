@@ -222,7 +222,7 @@ class RequestGenerator extends AbstractGenerator
             ColumnTypes::ASCII_STRING, ColumnTypes::BINARY, ColumnTypes::BLOB, ColumnTypes::DATE_MUTABLE,
             ColumnTypes::DATE_IMMUTABLE, ColumnTypes::DATEINTERVAL, ColumnTypes::DATETIME_MUTABLE,
             ColumnTypes::DATETIME_IMMUTABLE, ColumnTypes::DATETIMETZ_MUTABLE, ColumnTypes::DATETIMETZ_IMMUTABLE,
-            ColumnTypes::GUID, ColumnTypes::STRING, ColumnTypes::TEXT => TypeScriptType::STRING,
+            ColumnTypes::GUID, ColumnTypes::VARCHAR, ColumnTypes::TEXT => TypeScriptType::STRING,
             ColumnTypes::BIGINT, ColumnTypes::DECIMAL, ColumnTypes::FLOAT, ColumnTypes::INTEGER,
             ColumnTypes::SMALLINT, ColumnTypes::TIME_MUTABLE, ColumnTypes::TIME_IMMUTABLE => TypeScriptType::NUMBER,
             ColumnTypes::BOOLEAN => TypeScriptType::BOOLEAN,
