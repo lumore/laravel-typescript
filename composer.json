@@ -1,16 +1,21 @@
 {
-    "name": "based/laravel-typescript",
+    "name": "lumore/laravel-typescript",
     "description": "Transform Laravel models into TypeScript interfaces",
     "keywords": [
         "laravel",
         "typescript"
     ],
-    "homepage": "https://github.com/lepikhinb/laravel-typescript",
+    "homepage": "https://github.com/lumore/laravel-typescript",
     "license": "MIT",
     "authors": [
         {
             "name": "Boris Lepikhin",
             "email": "boris@lepikhin.com",
+            "role": "Developer"
+        },
+        {
+            "name": "Adil Rakhimbayev",
+            "email": "lumoredev@gmail.com",
             "role": "Developer"
         }
     ],
@@ -28,12 +33,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Based\\TypeScript\\": "src"
+            "Lumore\\TypeScript\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Based\\TypeScript\\Tests\\": "tests"
+            "Lumore\\TypeScript\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -47,7 +52,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Based\\TypeScript\\TypeScriptServiceProvider"
+                "Lumore\\TypeScript\\TypeScriptServiceProvider"
             ]
         }
     },

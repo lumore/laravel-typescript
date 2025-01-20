@@ -1,8 +1,8 @@
 <?php
 
-namespace Based\TypeScript;
+namespace Lumore\TypeScript;
 
-use Based\TypeScript\Commands\TypeScriptGenerateCommand;
+use Lumore\TypeScript\Commands\TypeScriptGenerateCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 

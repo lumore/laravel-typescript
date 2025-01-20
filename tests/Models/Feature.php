@@ -1,6 +1,6 @@
 <?php
 
-namespace Based\TypeScript\Tests\Models;
+namespace Lumore\TypeScript\Tests\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;

@@ -1,8 +1,8 @@
 <?php
 
-namespace Based\TypeScript\Tests;
+namespace Lumore\TypeScript\Tests;
 
-use Based\TypeScript\TypeScriptServiceProvider;
+use Lumore\TypeScript\TypeScriptServiceProvider;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Orchestra\Testbench\TestCase as Orchestra;
@@ -14,21 +14,21 @@ class TestCase extends Orchestra
         parent::setUp();
     }
 
-    protected function getPackageProviders($app)
+    protected function getPackageProviders($app): array
     {
         return [
             TypeScriptServiceProvider::class,
         ];
     }
 
-    public function getEnvironmentSetUp($app)
+    public function getEnvironmentSetUp($app): void
     {
         config()->set('database.default', 'testing');
 
         $this->migrateDatabase();
     }
 
-    public function migrateDatabase()
+    public function migrateDatabase(): void
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();

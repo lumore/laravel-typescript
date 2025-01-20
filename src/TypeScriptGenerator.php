@@ -1,6 +1,6 @@
 <?php
 
-namespace Based\TypeScript;
+namespace Lumore\TypeScript;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;

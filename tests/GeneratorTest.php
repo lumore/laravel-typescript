@@ -1,8 +1,8 @@
 <?php
 
-namespace Based\TypeScript\Tests;
+namespace Lumore\TypeScript\Tests;
 
-use Based\TypeScript\TypeScriptGenerator;
+use Lumore\TypeScript\TypeScriptGenerator;
 
 class GeneratorTest extends TestCase
 {
@@ -26,7 +26,7 @@ class GeneratorTest extends TestCase
         $result = file_get_contents($output);
 
         $this->assertEquals(3, substr_count($result, 'interface'));
-        $this->assertTrue(str_contains($result, 'sub_category?: Based.TypeScript.Tests.Models.Category | null;'));
+        $this->assertTrue(str_contains($result, 'sub_category?: Lumore.TypeScript.Tests.Models.Category | null;'));
         $this->assertTrue(str_contains($result, 'products_count?: number | null;'));
 
         unlink($output);

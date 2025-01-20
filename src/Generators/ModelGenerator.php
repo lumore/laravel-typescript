@@ -1,10 +1,10 @@
 <?php
 
-namespace Based\TypeScript\Generators;
+namespace Lumore\TypeScript\Generators;
 
-use Based\TypeScript\Definitions\ColumnTypes;
-use Based\TypeScript\Definitions\TypeScriptProperty;
-use Based\TypeScript\Definitions\TypeScriptType;
+use Lumore\TypeScript\Definitions\ColumnTypes;
+use Lumore\TypeScript\Definitions\TypeScriptProperty;
+use Lumore\TypeScript\Definitions\TypeScriptType;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelInspector;

@@ -1,10 +1,10 @@
 <?php
 
-namespace Based\TypeScript\Generators;
+namespace Lumore\TypeScript\Generators;
 
-use Based\TypeScript\Definitions\ColumnTypes;
-use Based\TypeScript\Definitions\TypeScriptProperty;
-use Based\TypeScript\Definitions\TypeScriptType;
+use Lumore\TypeScript\Definitions\ColumnTypes;
+use Lumore\TypeScript\Definitions\TypeScriptProperty;
+use Lumore\TypeScript\Definitions\TypeScriptType;
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Arr;
@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Validation\ClosureValidationRule;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Validation\Validator;
-use JetBrains\PhpStorm\Pure;
 
 class RequestGenerator extends AbstractGenerator
 {

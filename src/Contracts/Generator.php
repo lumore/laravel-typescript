@@ -1,6 +1,6 @@
 <?php
 
-namespace Based\TypeScript\Contracts;
+namespace Lumore\TypeScript\Contracts;
 
 use ReflectionClass;
 

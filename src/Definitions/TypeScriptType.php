@@ -1,6 +1,6 @@
 <?php
 
-namespace Based\TypeScript\Definitions;
+namespace Lumore\TypeScript\Definitions;
 
 use ReflectionMethod;
 use ReflectionUnionType;

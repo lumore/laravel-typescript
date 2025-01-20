@@ -1,8 +1,8 @@
 <?php
 
-namespace Based\TypeScript\Generators;
+namespace Lumore\TypeScript\Generators;
 
-use Based\TypeScript\Contracts\Generator;
+use Lumore\TypeScript\Contracts\Generator;
 use ReflectionClass;
 
 abstract class AbstractGenerator implements Generator

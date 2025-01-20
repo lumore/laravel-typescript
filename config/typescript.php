@@ -1,6 +1,6 @@
 <?php
 
-use Based\TypeScript\Generators\ModelGenerator;
+use Lumore\TypeScript\Generators\ModelGenerator;
 use Illuminate\Database\Eloquent\Model;
 
 return [
