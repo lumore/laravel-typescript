@@ -1,8 +1,14 @@
+## This is a fork of `lepikhinb/laravel-typescript`
+
+Warning: this package only supports Laravel 11+
+
+___
+
 # Laravel TypeScript
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/based/laravel-typescript.svg?style=flat-square)](https://packagist.org/packages/based/laravel-typescript)
-[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/lepikhinb/laravel-typescript/run-tests?label=tests)](https://github.com/lepikhinb/laravel-typescript/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/based/laravel-typescript.svg?style=flat-square)](https://packagist.org/packages/based/laravel-typescript)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/lumore/laravel-typescript.svg?style=flat-square)](https://packagist.org/packages/lumore/laravel-typescript)
+[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/lumore/laravel-typescript/run-tests?label=tests)](https://github.com/lumore/laravel-typescript/actions?query=workflow%3Arun-tests+branch%3Amain)
+[![Total Downloads](https://img.shields.io/packagist/dt/lumore/laravel-typescript.svg?style=flat-square)](https://packagist.org/packages/lumore/laravel-typescript)
 
 The package lets you generate TypeScript interfaces from your Laravel models.
 
@@ -49,16 +55,16 @@ declare namespace App.Models {
 
 ## Installation
 
-**Laravel 8 and PHP 8 are required.**
+**Laravel 11 and PHP 8 are required.**
 You can install the package via composer:
 
 ```bash
-composer require based/laravel-typescript
+composer require lumore/laravel-typescript
 ```
 
 You can publish the config file with:
 ```bash
-php artisan vendor:publish --provider="Based\TypeScript\TypeScriptServiceProvider" --tag="typescript-config"
+php artisan vendor:publish --provider="Lumore\TypeScript\TypeScriptServiceProvider" --tag="typescript-config"
 ```
 
 This is the contents of the published config file:
@@ -106,6 +112,7 @@ composer test
 
 ## Credits
 
+- [Adil Rakhimbayev](https://github.com/lumore)
 - [Boris Lepikhin](https://github.com/lepikhinb)
 - [All Contributors](../../contributors)
 
